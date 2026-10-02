@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, test } from "vitest";
 import App from "../../src/app/App";
 import { useGameStore } from "../../src/game/state/store";
-
 afterEach(() => cleanup());
 
 function freshGame(): void {
@@ -30,6 +29,19 @@ describe("first screen", () => {
     await userEvent.click(pass);
     await userEvent.click(pass);
     expect(await screen.findByText(/Réfléchir/)).toBeInTheDocument();
+  });
+
+  test("buying the upgrade shows faster work in UI", async () => {
+    freshGame();
+    const store = useGameStore.getState();
+    store.passManyMinutes(10);
+    store.doAction("think");
+    store.doAction("think");
+    render(<App />);
+    const buy = await screen.findByText(/Outils améliorés/);
+    expect(buy).toBeInTheDocument();
+    await userEvent.click(buy);
+    expect(await screen.findByText(/Travailler — 25 min/)).toBeInTheDocument();
   });
 
   test("no late-game elements at start", () => {

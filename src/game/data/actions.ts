@@ -32,12 +32,29 @@ export const ACTIONS: Record<string, ActionDef> = {
   },
 };
 
-export const UPGRADES: Record<string, { id: string; targetActionId: string; newDurationMinutes: number }> = {
+export interface UpgradeDef {
+  id: string;
+  name: string;
+  targetActionId: string;
+  newDurationMinutes: number;
+  cost: Partial<{ ideas: number; knowledge: number; money: number }>;
+  unlockAtLivedMinutes?: number;
+}
+
+export const UPGRADES: Record<string, UpgradeDef> = {
   "better-tools": {
     id: "better-tools",
+    name: "Outils améliorés",
     targetActionId: "work",
     newDurationMinutes: 25,
+    cost: { ideas: 2 },
+    unlockAtLivedMinutes: 6,
   },
+};
+
+export const TIME_CONTROLS = {
+  multiPassAmount: 10,
+  multiPassUnlockAtLivedMinutes: 30,
 };
 
 export const MEMORIES: Record<string, { id: string; title: string; text: string }> = {

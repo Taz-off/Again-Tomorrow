@@ -21,6 +21,21 @@ Slice: 30 premières minutes. Durée jouée: ~250 clics.
   Observer à `think` déjà débloqué (cercle vicieux). Fix : `src/game/systems/unlocks.ts`
   partagé (pass + actions), gating corrigé. Tests : 17/17.
 
+## Session 2026-10-02 (humain : Taz-off, capture 4803 min)
+
+Durée jouée: ~4800 clics. État : 4803 min, 41 idées, 73 connaissance, 4 actions visibles.
+
+### Observé
+
+- Boucle fonctionnelle après fix, mais grind au clic massif pour arriver là.
+- Le joueur a trouvé seul les 4 actions. Pas encore d'usage pour les idées.
+
+### Réponse (dev)
+
+- Ajout : achat Outils améliorés (2 idées → Travailler 30→25 min), bouton
+  PASSER 10 MINUTES dès 30 min, affichage argent, durées effectives.
+  Coûts provisoires, réversibles. Tests 23/23.
+
 ### Idées apparues
 
 - (aucune, à trier vers lab si besoin)

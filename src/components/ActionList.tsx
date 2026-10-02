@@ -1,11 +1,13 @@
 import { ACTIONS } from "../game/data/actions";
+import { getEffectiveDuration } from "../game/systems/actions";
 
 interface Props {
   unlockedActionIds: string[];
+  unlockedUpgradeIds: string[];
   onAction: (id: string) => void;
 }
 
-export default function ActionList({ unlockedActionIds, onAction }: Props) {
+export default function ActionList({ unlockedActionIds, unlockedUpgradeIds, onAction }: Props) {
   const visible = unlockedActionIds
     .map((id) => ACTIONS[id])
     .filter((a) => a !== undefined && a.id !== "observe" && a.id !== "pass");
@@ -19,7 +21,7 @@ export default function ActionList({ unlockedActionIds, onAction }: Props) {
           className="action-btn"
           onClick={() => onAction(a.id)}
         >
-          {a.name} — {a.durationMinutes} min
+          {a.name} — {getEffectiveDuration(a.id, unlockedUpgradeIds)} min
         </button>
       ))}
     </div>

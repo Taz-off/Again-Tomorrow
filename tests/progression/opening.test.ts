@@ -1,5 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { applyAction } from "../../src/game/systems/actions";
+import { purchaseUpgrade } from "../../src/game/systems/upgrades";
+import { getEffectiveDuration } from "../../src/game/systems/actions";
 import { passMinutes } from "../../src/game/systems/time";
 import { createInitialState } from "../../src/game/types";
 
@@ -25,5 +27,14 @@ describe("opening progression — first minutes", () => {
   test("no soft-lock: from start, pass always progresses", () => {
     const s = createInitialState();
     expect(passMinutes(s.livedMinutes, 1)).toBe(1);
+  });
+
+  test("first optimization: 2 ideas buy faster work (30 -> 25 min)", () => {
+    let s = { ...createInitialState(), livedMinutes: 10, ideas: 2 };
+    s = purchaseUpgrade(s, "better-tools");
+    expect(getEffectiveDuration("work", s.unlockedUpgradeIds)).toBe(25);
+    const after = applyAction(s, "work");
+    expect(after.livedMinutes).toBe(s.livedMinutes + 25);
+    expect(after.money).toBe(10);
   });
 });
