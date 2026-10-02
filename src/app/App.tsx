@@ -13,14 +13,14 @@ export default function App() {
   const doAction = useGameStore((s) => s.doAction);
 
   const showResources = ideas > 0 || knowledge > 0;
-  const thinkUnlocked = unlockedActionIds.includes("think");
+  const observeUnlocked = unlockedActionIds.includes("observe");
 
   return (
     <main className="stage">
       <div className="title-fade">AGAIN, TOMORROW</div>
       <TimeDisplay livedMinutes={livedMinutes} />
       <PassMinuteButton onPass={passOneMinute} />
-      {thinkUnlocked && unlockedActionIds.includes("observe") ? (
+      {observeUnlocked ? (
         <div className="actions">
           <button
             type="button"

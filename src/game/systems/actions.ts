@@ -1,6 +1,7 @@
 import { ACTIONS, MEMORIES, UPGRADES } from "../data/actions";
 import type { GameState } from "../types";
 import { applyDuration } from "./time";
+import { applyUnlocks } from "./unlocks";
 
 export function getEffectiveDuration(actionId: string, unlockedUpgradeIds: string[]): number {
   const def = ACTIONS[actionId];
@@ -33,14 +34,5 @@ export function applyAction(state: GameState, actionId: string): GameState {
     const mem = MEMORIES[def.memoryId];
     if (mem) next.memories.push({ ...mem });
   }
-  for (const candidate of Object.values(ACTIONS)) {
-    if (
-      candidate.unlockAtLivedMinutes !== undefined &&
-      next.livedMinutes >= candidate.unlockAtLivedMinutes &&
-      !next.unlockedActionIds.includes(candidate.id)
-    ) {
-      next.unlockedActionIds.push(candidate.id);
-    }
-  }
-  return next;
+  return applyUnlocks(next);
 }

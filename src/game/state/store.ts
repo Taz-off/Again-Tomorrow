@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { applyAction } from "../systems/actions";
 import { passMinutes } from "../systems/time";
+import { applyUnlocks } from "../systems/unlocks";
 import { createInitialState, type GameState } from "../types";
 import { loadSave, saveNow } from "../persistence/save";
 
@@ -16,7 +17,8 @@ export const useGameStore = create<GameStore>((set) => ({
   ...(loaded ?? createInitialState()),
   passOneMinute: () =>
     set((s) => {
-      const next: GameState = { ...s, livedMinutes: passMinutes(s.livedMinutes, 1) };
+      const advanced: GameState = { ...s, livedMinutes: passMinutes(s.livedMinutes, 1) };
+      const next = applyUnlocks(advanced);
       saveNow(next);
       return next;
     }),

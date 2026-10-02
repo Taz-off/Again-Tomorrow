@@ -1,8 +1,33 @@
-## Session 2026-10-02
+## Session 2026-10-02 (humain : Taz-off, build bootstrap ce5d265)
 
-Build/commit: bootstrap initial.
-Slice: 30 premières minutes.
-Durée jouée: non joué par humain.
+Slice: 30 premières minutes. Durée jouée: ~250 clics.
+
+### Observé
+
+- Écran : seul le bouton PASSER UNE MINUTE, compteur monte (250 min), RIEN ne se débloque.
+- Capture : 246 min, aucune action visible.
+
+### Compréhension du joueur
+
+- Attendait Observer / Réfléchir vers 1-3 min (annoncé au brief).
+
+### Ennui / friction
+
+- BLOCKER : 250 clics sans nouveauté = boucle morte.
+
+### Bugs
+
+- Cause : `passOneMinute` n'évaluait jamais les déblocages + `App.tsx` conditionnait
+  Observer à `think` déjà débloqué (cercle vicieux). Fix : `src/game/systems/unlocks.ts`
+  partagé (pass + actions), gating corrigé. Tests : 17/17.
+
+### Idées apparues
+
+- (aucune, à trier vers lab si besoin)
+
+### Décisions
+
+- Aucune idée devient canon automatiquement.
 
 ### Observé
 
