@@ -1,0 +1,25 @@
+# deps
+node_modules/
+
+# builds
+dist/
+dist-ssr/
+*.local
+
+# vite / ts
+*.tsbuildinfo
+node_modules/.tmp/
+
+# tauri (quand src-tauri sera créé)
+src-tauri/target/
+src-tauri/gen/
+
+# os / ide
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# env / secrets (jamais versionnés)
+.env
+.env.*

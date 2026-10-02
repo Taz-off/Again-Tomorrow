@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permissions": {
+    "read": "allow",
+    "edit": {
+      "designer": "deny",
+      "planner": "deny",
+      "reviewer": "deny",
+      "builder": "allow"
+    },
+    "shell": {
+      "allow": ["git status", "git diff", "npm test", "npm run typecheck", "npm run build"],
+      "deny": ["git push"]
+    }
+  }
+}

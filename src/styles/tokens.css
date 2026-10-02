@@ -1,0 +1,97 @@
+:root {
+  --bg-warm: #faf8f2;
+  --surface: #ffffff;
+  --text-primary: #1a1815;
+  --text-muted: #8a8478;
+  --accent: #2f5d3a;
+  --accent-ink: #ffffff;
+  --radius: 10px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 48px;
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+  --dur-fast: 120ms;
+  --dur-calm: 320ms;
+  --ease-calm: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-warm);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage {
+  text-align: center;
+  padding: var(--space-5) var(--space-4);
+  max-width: 560px;
+}
+
+.title-fade {
+  color: var(--text-muted);
+  letter-spacing: 0.3em;
+  font-size: 13px;
+  margin-bottom: var(--space-5);
+}
+
+.time {
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  margin: var(--space-3) 0 var(--space-4);
+  font-variant-numeric: tabular-nums;
+}
+
+.time small {
+  font-size: 22px;
+  color: var(--text-muted);
+  margin-left: var(--space-2);
+}
+
+.pass-btn {
+  font-size: 17px;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--text-primary);
+  background: var(--text-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-calm), opacity var(--dur-calm);
+}
+
+.pass-btn:hover { opacity: 0.88; }
+.pass-btn:active { transform: scale(0.98); }
+.pass-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.actions { margin-top: var(--space-4); display: grid; gap: var(--space-2); }
+.action-btn {
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: 1px solid #d8d2c4;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 15px;
+}
+.action-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.resources { margin-top: var(--space-4); color: var(--text-muted); font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
